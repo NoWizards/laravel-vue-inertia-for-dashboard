@@ -5,12 +5,4 @@
   
 </template>
 <script setup>
-import { Link } from '@inertiajs/vue3';
-
-</script>
-<script>
-import MainLayout from '../Layout/MainLayout.vue';
-export default{
-    layout: MainLayout,
-}
 </script>

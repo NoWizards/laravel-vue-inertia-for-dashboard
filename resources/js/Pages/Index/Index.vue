@@ -7,7 +7,6 @@
         <p>message: {{ message }}</p>     
 </template>
 <script setup>
-import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 defineProps({
     message: {
@@ -20,10 +19,4 @@ defineProps({
     }
 });
 const currentDateTime = ref(new Date().toLocaleString());
-</script>
-<script>
-import MainLayout from '../Layout/MainLayout.vue';
-export default{
-    layout: MainLayout,
-}
 </script>
