@@ -55,7 +55,21 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        Listing::create($request->all());
+        Listing::create(
+            $request->validate([
+                'beds' => 'required|integer|min:0|max:20',
+                'baths' => 'required|integer|min:0|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'code' => 'required',
+                'street' => 'required',
+                'street_nr' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:1|max:2000000000',
+            ], [
+                'beds.required' => 'Please enter the number of beds.',
+                'beds.integer' => 'Beds must be a number. A nice number.',
+            ])
+        );
 
         return redirect()->route('listings.index')
             ->with('success', 'Listing was created!');

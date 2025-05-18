@@ -4,7 +4,7 @@
         <nav>
             <Link href="/" class="links">Index</Link>
             <Link href="/about" class="links">About</Link>
-            <Link href="/create" class="links">Create</Link>
+            <Link href="/listings/create" class="links">Create</Link>
         </nav>
         <div v-if="flashSuccess" class="success">
             {{ flashSuccess }}
