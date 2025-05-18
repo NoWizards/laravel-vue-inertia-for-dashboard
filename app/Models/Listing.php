@@ -9,4 +9,14 @@ class Listing extends Model
 {
     //
     use HasFactory;
+    protected $fillable = [
+        'beds',
+        'baths',
+        'area',
+        'city',
+        'street',
+        'code',
+        'street_nr',
+        'price',
+    ];
 }

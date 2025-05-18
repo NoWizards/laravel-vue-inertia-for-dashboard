@@ -8,4 +8,4 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
 Route::get('/contact', [IndexController::class, 'contact']);
 
-Route::resource('listings', ListingController::class)->only(['index', 'show']);
+Route::resource('listings', ListingController::class)->only(['index', 'show', 'create', 'store']);
