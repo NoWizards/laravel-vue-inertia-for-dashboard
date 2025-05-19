@@ -1,13 +1,13 @@
 <template>
     <div v-for="listing in listings" :key="listing.id" class="flex gap-2 mx-2 my-1">
-        <Link :href="`/listings/${listing.id}`">
+        <Link :href="route('listings.show', {listing: listing.id})">
             <ListingAddress :listing="listing" />
         </Link>
         <div>
-            <Link :href="`/listings/${listing.id}/edit`" class="edit-button">Edit</Link>
+            <Link :href="route('listings.edit', {listing: listing.id})" class="edit-button">Edit</Link>
         </div>
         <div>
-            <Link :href="`/listings/${listing.id}`" method="DELETE" class="delete-button">Delete</Link>
+            <Link :href="route('listings.destroy', {listing: listing.id})" method="DELETE" as="button" class="delete-button">Delete</Link>
         </div>
     </div>
 </template>

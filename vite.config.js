@@ -3,6 +3,8 @@ import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 
+import path from 'path';
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -24,6 +26,11 @@ export default defineConfig({
                     // `false` will leave absolute URLs un-touched so they can
                     // reference assets in the public directory as expected.
                     includeAbsolute: false,
+                },
+            },
+            resolve: {
+                alias: {
+                ziggy: path.resolve("vendor/tightenco/ziggy/dist/index.esm.js"),
                 },
             },
         }),
