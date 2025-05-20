@@ -1,96 +1,84 @@
 <template>
-    <div class="container">
 
-
-    <h2>Create a new House to list</h2>
     <form @submit.prevent="create">
-      <div>
-        <div>
-            <label>Beds</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model.number="form.beds" type="text" />
-                <div v-if="form.errors.beds" class="text-red-500">
+
+      <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-2">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Beds</label>
+        <input v-model.number="form.beds" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+
+                <div v-if="form.errors.beds"  class="input-error">
                 {{ form.errors.beds }}
                 </div>
-            </div>
+
         </div>
   
-        <div>
-            <label>Baths</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model.number="form.baths" type="text" />
-                <div v-if="form.errors.baths" class="text-red-500">
+        <div class="col-span-2">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Baths</label>
+        <input v-model.number="form.baths" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.baths"  class="input-error">
                 {{ form.errors.baths }}
                 </div>
-            </div>
-        </div>
+                </div>
+
+
   
-        <div>
-            <label>Area</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model.number="form.area" type="text" />
-                <div v-if="form.errors.area" class="text-red-500">
+                <div class="col-span-2">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Area</label>
+        <input v-model.number="form.area" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.area"  class="input-error">
                 {{ form.errors.area }}
                 </div>
-            </div>
+
         </div>
   
-        <div>
-          <label>City</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model="form.city" type="text" />
-                <div v-if="form.errors.city" class="text-red-500">
+        <div class="col-span-4">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">City</label>
+        <input v-model="form.city" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.city"  class="input-error">
                 {{ form.errors.city }}
                 </div>
-            </div>
         </div>
   
-        <div>
-          <label>Post Code</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model="form.code" type="text" />
-                <div v-if="form.errors.code" class="text-red-500">
+        <div class="col-span-2">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Post Code</label>
+        <input v-model="form.code" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.code"  class="input-error">
                 {{ form.errors.code }}
                 </div>
-            </div>
         </div>
   
-        <div>
-          <label>Street</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model="form.street" type="text" />
-                <div v-if="form.errors.street" class="text-red-500">
+        <div class="col-span-4">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Street</label>
+        <input v-model="form.street" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.street"  class="input-error">
                 {{ form.errors.street }}
                 </div>
-            </div>
         </div>
   
-        <div>
-          <label>Street Nr</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model="form.street_nr" type="text" />
-                <div v-if="form.errors.street_nr" class="text-red-500">
+        <div class="col-span-2">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Street Nr</label>
+        <input v-model.number="form.street_nr" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.street_nr"  class="input-error">
                 {{ form.errors.street_nr }}
                 </div>
-            </div>
         </div>
   
-        <div>
-          <label>Price</label>
-            <div class="flex justify-start ml-2 gap-2">
-                <input v-model.number="form.price" type="text" />
-                <div v-if="form.errors.price" class="text-red-500">
+        <div class="col-span-6">
+        <label class="block mb-1 text-gray-500 dark:text-gray-300 font-medium">Price</label>
+        <input v-model.number="form.price" type="text" class="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500" />
+                <div v-if="form.errors.price"  class="input-error">
                 {{ form.errors.price }}
                 </div>
-            </div>
         </div>
   
-        <div class="flex items-center justify-end mt-4">
-          <button type="submit">Create</button>
+        <div class="col-span-6">
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium p-2 rounded-md">Create</button>
         </div>
+
       </div>
     </form>
-    </div>
+
   </template>
   
   <script setup>
