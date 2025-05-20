@@ -1,36 +1,41 @@
 <template>
-    <div v-for="listing in listings" :key="listing.id" class="flex gap-2 mx-2 my-1">
-        <Link :href="route('listings.show', {listing: listing.id})">
-            <ListingAddress :listing="listing" />
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <Box v-for="listing in listings" :key="listing.id">
+      <div>
+        <Link
+          :href="route('listings.show', {listing: listing.id})"
+        >
+        <Price :price="listing.price" class="text-2xl font-bold" />
+        <ListingSpace :listing="listing" class="text-lg" />
+        <ListingAddress :listing="listing" class="text-gray-500" />
         </Link>
-        <div>
-            <Link :href="route('listings.edit', {listing: listing.id})" class="edit-button">Edit</Link>
-        </div>
-        <div>
-            <Link :href="route('listings.destroy', {listing: listing.id})" method="DELETE" as="button" class="delete-button">Delete</Link>
-        </div>
+      </div>
+      <div>
+        <Link
+          :href="route('listings.edit', {listing: listing.id})"
+        >
+          Edit
+        </Link>
+      </div>
+      <div>
+        <Link
+          :href="route('listings.destroy', {listing: listing.id})"
+          method="DELETE" as="button"
+        >
+          Delete
+        </Link>
+      </div>
+    </Box>
     </div>
 </template>
 <style scoped>
-.edit-button {
-    background-color: rgb(70, 163, 194);
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-.delete-button {
-    background-color: rgb(255, 0, 0);
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-}
 </style>  
   <script setup>
-  import {Link} from '@inertiajs/vue3'
+  import {Link} from '@inertiajs/vue3';
+  import Box from '@/Components/UI/Box.vue';
   import ListingAddress from '@/Components/ListingAddress.vue'
+  import ListingSpace from '@/Components/ListingSpace.vue'
+  import Price from '@/Components/Price.vue'
   defineProps({
     listings: Array,
   })
