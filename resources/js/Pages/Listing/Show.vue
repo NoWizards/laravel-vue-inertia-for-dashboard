@@ -47,18 +47,17 @@ import ListingSpace from '@/Components/ListingSpace.vue'
 import Price from '@/Components/Price.vue'
 import Box from '@/Components/UI/Box.vue';
 import ListingAddress from '@/Components/ListingAddress.vue';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
+import {useMonthlyPayment} from '@/Composables/useMonthlyPayment';
 const interestRate = ref(9);
 const duration = ref(10);
 
 const props = defineProps({
   listing: Object,
 })
-const monthlyPayment = computed(()=>{
-  const initialPrice = props.listing.price;
-  const monthlyInterestRate = interestRate.value/100/12;
-  const numberOfPayments = duration.value * 12;
-
-  return initialPrice*monthlyInterestRate*(Math.pow(1+monthlyInterestRate, numberOfPayments))/ (Math.pow(1 + monthlyInterestRate,numberOfPayments)-1);
-})
+const {monthlyPayment}  = useMonthlyPayment(
+  props.listing.price,
+  interestRate,
+  duration
+)
 </script>
