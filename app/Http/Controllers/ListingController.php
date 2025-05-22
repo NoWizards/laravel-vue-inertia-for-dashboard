@@ -7,9 +7,12 @@ use App\Http\Resources\ListingResource;
 use Inertia\Inertia;
 use PhpParser\Node\Expr\List_;
 use Termwind\Components\Li;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ListingController extends Controller
 {
+
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -46,6 +49,7 @@ class ListingController extends Controller
      */
     public function create()
     {
+        // $this->authorize('create', Listing::class);
         return inertia('Listing/Create');
         //
     }
@@ -55,7 +59,7 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        Listing::create(
+        $request->user()->listings()->create(
             $request->validate([
                 'beds' => 'required|integer|min:0|max:20',
                 'baths' => 'required|integer|min:0|max:20',
@@ -80,6 +84,7 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
+        // $this->authorize('view', $listing);
         return Inertia('Listing/Show', [
             'listing' => $listing,
         ]);
@@ -91,6 +96,7 @@ class ListingController extends Controller
     public function edit(Listing $listing)
     {
         //
+        $this->authorize('update', $listing);
         return inertia(
             'Listing/Edit',
             [
@@ -128,6 +134,7 @@ class ListingController extends Controller
     public function destroy(Listing $listing)
     {
         //
+        $this->authorize('delete', $listing);
         $listing->delete();
 
         return redirect()->back()
