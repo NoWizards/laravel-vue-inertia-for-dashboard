@@ -10,7 +10,7 @@
         </div>
 
         <div v-if="user" class="flex items-center gap-4">
-            <div class="text-sm text-gray-500">{{ user.name }}</div>
+          <Link class="text-sm text-gray-500" :href="route('realtor.listing.index')">{{ user.name }}</Link>
             <div class="p-2 rounded-md bg-indigo-600 hover:bg-indigo-500 text-center btn-primary">
                 <Link :href="route('listings.create')" class=" text-white font-medium text-center">+ New Listing</Link>
             </div>
