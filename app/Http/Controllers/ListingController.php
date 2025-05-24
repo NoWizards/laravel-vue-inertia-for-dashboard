@@ -16,25 +16,59 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Inertia::render('Listing/Index', [
-            //'listings' => Listing::all(),
-            //'listings' => ListingResource::collection(\App\Models\Listing::all()),
-            'listings' => Listing::select('id','beds', 'baths','area', 'city','street','street_nr', 'price')->get()-> map(function ($listing) {
-                return [
-                    'id' => $listing->id,
-                    'price' => $listing->price,
-                    'beds' => $listing->beds,
-                    'baths' => $listing->baths,
-                    'area' => $listing->area,
-                    'city' => $listing->city,
-                    'code' => $listing->code,
-                    'street' => $listing->street,
-                    'street_nr' => $listing->street_nr,
-                ];
-            }),
+        $filters =  $request->only([
+            'priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'
         ]);
+
+        $query = Listing::mostRecent();
+        //This if syntax is the same as the one below, but it is more readable
+        // easier to debug and understand
+            if($filters['priceFrom'] ?? false){
+                $query->where('price', '>=', $filters['priceFrom']);
+            }
+
+            //This is the same as the one above, but it is more elegant 
+            // and fluent with higher order functions
+           $query->when($filters['priceTo'] ?? false, function ($query, $priceTo) {
+                $query->where('price', '<=', $priceTo);
+            })
+            ->when($filters['beds'] ?? false, function ($query, $beds) {
+                $query->where('beds', '=', $beds);
+            })
+            ->when($filters['baths'] ?? false, function ($query, $baths) {
+                $query->where('baths', '=', $baths);
+            })
+            ->when($filters['areaFrom'] ?? false, function ($query, $areaFrom) {
+                $query->where('area', '>=', $areaFrom);
+            })
+            ->when($filters['areaTo'] ?? false, function ($query, $areaTo) {
+                $query->where('area', '<=', $areaTo);
+            });
+
+        return Inertia::render('Listing/Index', [
+
+
+
+            'filters' => $filters,
+            'listings' => $query->paginate(10)
+                ->withQueryString()
+            // ->get()-> map(function ($listing) {
+            //     return [
+            //         'id' => $listing->id,
+            //         'price' => $listing->price,
+            //         'beds' => $listing->beds,
+            //         'baths' => $listing->baths,
+            //         'area' => $listing->area,
+            //         'city' => $listing->city,
+            //         'code' => $listing->code,
+            //         'street' => $listing->street,
+            //         'street_nr' => $listing->street_nr,
+            //     ];
+            // }),
+]);
+        
     }
     // 'beds' => fake()->numberBetween(1, 5),
     // 'baths' => fake()->numberBetween(1, 5),

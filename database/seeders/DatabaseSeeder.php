@@ -27,11 +27,11 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
         ]);
 
-        \App\Models\Listing::factory(5)->create([
+        \App\Models\Listing::factory(8)->create([
             'by_user_id' => 1,
         ]);
 
-        \App\Models\Listing::factory(5)->create([
+        \App\Models\Listing::factory(8)->create([
             'by_user_id' => 2,
         ]);
     }
