@@ -15,7 +15,7 @@ Route::resource('listings', ListingController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 Route::resource('listings', ListingController::class)
-    ->except(['create', 'store', 'edit', 'update', 'destroy']);
+    ->except(['create', 'store', 'edit', 'update']);
 
 Route::get('/login', [AuthController::class, 'create'])->name('login');
 //                 'baths' => 'required|integer|min:0|max:20',
@@ -30,5 +30,6 @@ Route::prefix('realtor')
   ->name('realtor.')
   ->middleware('auth')
   ->group(function () {
-    Route::resource('listing', RealtorListingController::class);
+    Route::resource('listing', RealtorListingController::class)
+    ->only(['index', 'destroy']);
   });

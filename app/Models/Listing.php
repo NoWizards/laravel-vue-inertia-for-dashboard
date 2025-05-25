@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Listing extends Model
 {
     //
     use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'beds',
         'baths',
