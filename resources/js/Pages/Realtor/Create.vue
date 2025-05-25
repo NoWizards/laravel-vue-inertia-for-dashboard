@@ -94,7 +94,7 @@
     street_nr: null,
     price: 0,
   })
-  const create = () => form.post(route('listings.store'))
+  const create = () => form.post(route('realtor.listing.store'))
   </script>
   
   <style scoped>

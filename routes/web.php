@@ -11,11 +11,11 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
 Route::get('/contact', [IndexController::class, 'contact']);
 
+// Route::resource('listings', ListingController::class)
+//     ->only(['create', 'store', 'edit', 'update', 'destroy'])
+//     ->middleware('auth');
 Route::resource('listings', ListingController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
-    ->middleware('auth');
-Route::resource('listings', ListingController::class)
-    ->except(['create', 'store', 'edit', 'update']);
+    ->only(['index', 'show']);
 
 Route::get('/login', [AuthController::class, 'create'])->name('login');
 //                 'baths' => 'required|integer|min:0|max:20',
@@ -30,6 +30,16 @@ Route::prefix('realtor')
   ->name('realtor.')
   ->middleware('auth')
   ->group(function () {
+
+    Route::name('listing.restore')
+    ->put(
+      'listing/{listing}/restore',
+      [RealtorListingController::class, 'restore']
+    )->withTrashed();
+
     Route::resource('listing', RealtorListingController::class)
-    ->only(['index', 'destroy']);
+    ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
+    ->withTrashed();
   });
+
+  
