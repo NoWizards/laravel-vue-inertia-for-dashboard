@@ -6,6 +6,7 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\RealtorListingController;
+use App\Http\Controllers\RealtorListingImageController;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/about', [IndexController::class, 'about']);
@@ -31,15 +32,17 @@ Route::prefix('realtor')
   ->middleware('auth')
   ->group(function () {
 
-    Route::name('listing.restore')
-    ->put(
-      'listing/{listing}/restore',
-      [RealtorListingController::class, 'restore']
-    )->withTrashed();
+      Route::name('listing.restore')
+      ->put(
+        'listing/{listing}/restore',
+        [RealtorListingController::class, 'restore']
+      )->withTrashed();
 
-    Route::resource('listing', RealtorListingController::class)
-    ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
-    ->withTrashed();
+      Route::resource('listing', RealtorListingController::class)
+      ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
+      ->withTrashed();
+
+      Route::resource('listing.image', RealtorListingImageController::class)
+      ->only(['create', 'store', 'destroy']);
+    
   });
-
-  

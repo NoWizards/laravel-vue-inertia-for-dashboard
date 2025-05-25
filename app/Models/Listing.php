@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class Listing extends Model
 {
     //
@@ -32,6 +33,11 @@ class Listing extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'by_user_id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ListingImage::class);
     }
 
     public function scopeMostRecent(Builder $query): Builder
