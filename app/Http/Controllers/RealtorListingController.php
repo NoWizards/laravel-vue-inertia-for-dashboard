@@ -33,6 +33,7 @@ class RealtorListingController extends Controller
                     //->mostRecent()
                     ->filter($filters)
                     ->withCount('images')
+                    ->withCount('offers')
                     ->paginate(5)
                     ->withQueryString()
             ]
@@ -48,6 +49,14 @@ class RealtorListingController extends Controller
     {
         // $this->authorize('create', Listing::class);
         return inertia('Realtor/Create');
+    }
+
+    public function show(Listing $listing)
+    {
+        return inertia(
+            'Realtor/Show',
+            ['listing' => $listing->load('offers', 'offers.bidder')]
+        );
     }
 
     /**

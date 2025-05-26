@@ -5,6 +5,13 @@
     </section>
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <Box v-for="listing in listings.data" :key="listing.id" :class="{ 'bg-amber-100': listing.deleted_at }">
+
+          <div
+            v-if="listing.sold_at != null" 
+            class="text-xs font-bold uppercase border border-dashed p-1 border-green-300 text-green-500 dark:border-green-600 dark:text-green-600 inline-block rounded-md mb-2"
+          >
+            sold
+          </div>
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
             <div>
                 <div class="xl:flex items-center gap-2">
@@ -56,6 +63,15 @@
               class="block w-full btn-outline text-xs font-medium text-center"
             >
               Images ({{ listing.images_count }})
+            </Link>
+          </div>
+
+          <div class="mt-2">
+            <Link
+              :href="route('realtor.listing.show', { listing: listing.id })"
+              class="block w-full btn-outline text-xs font-medium text-center"
+            >
+              Offers ({{ listing.offers_count }})
             </Link>
           </div>
         </section>
